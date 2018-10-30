@@ -15,14 +15,8 @@ export default (
         <Route exact path='/' component={Landing} />
         <Route path='/register' component={Register} />
         <Route path='/login' component={Login} />
-        <Route path='/nav' render={ () => (
-            <Nav>
-                <Switch>
-                    <Route component={Dashboard} path='/nav/dashboard' />
-                    <Route component={Search} path='/nav/search' />
-                    <Route component={Calendar} path='/nav/calendar' />
-                </Switch>
-            </Nav>
-         ) } />
+        <Route component={Dashboard} path='/dashboard' />
+        <Route component={Search} path='/search' />
+        <Route component={Calendar} path='/calendar' />
     </Switch>
 )

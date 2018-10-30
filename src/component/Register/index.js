@@ -12,13 +12,14 @@ export default class Landing extends Component {
         return(
         <Form>
             <Row form>
-                <Col md={6}>
+            <Col sm={2} />
+                <Col sm={4}>
                     <FormGroup>
                         <Label for="firstName">First name</Label>
                         <Input type="firstName" name="firstName" id="firstName" placeholder="First name" />
                     </FormGroup>
                 </Col>
-                <Col md={6}>
+                <Col sm={4}>
                     <FormGroup>
                         <Label for="username">Username</Label>
                         <Input type="username" name="username" id="username" placeholder="Minimum 5 characters" />
@@ -26,13 +27,14 @@ export default class Landing extends Component {
                 </Col>
             </Row>
             <Row form>
-                <Col md={6}>
+                <Col sm={2} />
+                <Col sm={4}>
                     <FormGroup>
                         <Label for="email">Email</Label>
                         <Input type="email" name="email" id="email" placeholder="Email" />
                     </FormGroup>
                 </Col>
-                <Col md={6}>
+                <Col sm={4}>
                     <FormGroup>
                         <Label for="password">Password</Label>
                         <Input type="password" name="password" id="password" placeholder="Minimum of 8 characters" />
@@ -40,13 +42,14 @@ export default class Landing extends Component {
                 </Col>
             </Row>
             <Row form>
-                <Col md={6}>
+                <Col sm={2} />
+                <Col sm={4}>
                     <FormGroup>
                         <Label for="city">City</Label>
                         <Input type="text" name="city" id="city" placeholder="City"/>
                     </FormGroup>
                 </Col>
-                <Col md={6}>
+                <Col sm={4}>
                     <FormGroup>
                         <Label for="country">Country</Label>
                         <Input type="text" name="country" id="country" placeholder="Country"/>
