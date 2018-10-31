@@ -47,6 +47,8 @@ export default class Landing extends Component {
             case 'country':
                 this.setState({country:val});
                 break;
+            default:
+                break;
         }
     }
 

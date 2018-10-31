@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 
 //Bootstrap/Reactstrap
-import { Col, Button, Form, FormGroup, Label, Input, FormText, Row } from 'reactstrap';
+import { Col, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
 export default class Login extends Component {
 

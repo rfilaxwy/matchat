@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 
 //Redux
-import {Provider} from 'react-redux';
+// import {Provider} from 'react-redux';
 // import store from './ducks/store';
 
 //Routing

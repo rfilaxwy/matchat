@@ -1,5 +1,3 @@
-import React from 'react';
-
 export default function Handler(props){
     let input = props.target.name;
     let val = props.target.value;
@@ -21,6 +19,8 @@ export default function Handler(props){
             break;
         case 'country':
             this.setState({country:val});
+            break;
+        default:
             break;
     }
 }

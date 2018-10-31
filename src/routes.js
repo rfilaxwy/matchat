@@ -6,7 +6,6 @@ import Calendar from './component/Calendar'
 import Dashboard from './component/Dashboard'
 import Landing from './component/Landing'
 import Login from './component/Login'
-import Nav from './component/Nav'
 import Register from './component/Register'
 import Search from './component/Search'
 
