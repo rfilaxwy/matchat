@@ -1,0 +1,21 @@
+users table
+
+CREATE TABLE users(
+userid serial PRIMARY KEY,
+firstname VARCHAR, 
+username VARCHAR, 
+email VARCHAR, 
+password VARCHAR,
+city VARCHAR,
+country VARCHAR);
+
+profile table
+
+CREATE TABLE profile(
+id serial PRIMARY KEY,
+userid INTEGER REFERENCES users(userid),
+bio VARCHAR,
+interest_1 VARCHAR,
+interest_2 VARCHAR,
+interest_3 VARCHAR
+);
