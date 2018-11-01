@@ -1,25 +1,20 @@
 export default function Handler(props){
     let input = props.target.name;
     let val = props.target.value;
+    console.log(input)
     switch (input){
         case 'firstname':
-            this.setState({firstname:val});
-            break;
+            return val;
         case 'username':
-            this.setState({username:val});
-            break;
+            return val;
         case 'email':
-            this.setState({email:val});
-            break;
+            return val;
         case 'password':
-            this.setState({password:val});
-            break;
+            return val;
         case 'city':
-            this.setState({city:val});
-            break;
+            return val;
         case 'country':
-            this.setState({country:val});
-            break;
+            return val;
         default:
             break;
     }

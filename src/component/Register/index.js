@@ -22,6 +22,7 @@ export default class Landing extends Component {
             country:''
         }
         this.handleChange = this.handleChange.bind(this);
+        
     }
 
     handleChange(event){
@@ -62,13 +63,13 @@ export default class Landing extends Component {
                 <Col sm={4}>
                     <FormGroup>
                         <Label for="firstName">First name</Label>
-                        <Input onChange={(e) => Handler(e)} type="firstName" name="firstName" id="firstName" placeholder="First name" />
+                        <Input onChange={(e) => this.setState({firstname:Handler(e)})} type="firstName" name="firstName" id="firstName" placeholder="First name" />
                     </FormGroup>
                 </Col>
                 <Col sm={4}>
                     <FormGroup>
                         <Label for="username">Username</Label>
-                        <Input onChange={(e) => Handler(e)} type="username" name="username" id="username" placeholder="Minimum 5 characters" />
+                        <Input onChange={(e) => this.setState({username:Handler(e)})} type="username" name="username" id="username" placeholder="Minimum 5 characters" />
                     </FormGroup>
                 </Col>
             </Row>
@@ -77,13 +78,13 @@ export default class Landing extends Component {
                 <Col sm={4}>
                     <FormGroup>
                         <Label for="email">Email</Label>
-                        <Input onChange={(e) => Handler(e)} type="email" name="email" id="email" placeholder="Email" />
+                        <Input onChange={(e) => this.setState({email:Handler(e)})} type="email" name="email" id="email" placeholder="Email" />
                     </FormGroup>
                 </Col>
                 <Col sm={4}>
                     <FormGroup>
                         <Label for="password">Password</Label>
-                        <Input onChange={(e) => Handler(e)} type="password" name="password" id="password" placeholder="Minimum of 8 characters" />
+                        <Input onChange={(e) => this.setState({password:Handler(e)})} type="password" name="password" id="password" placeholder="Minimum of 8 characters" />
                     </FormGroup>
                 </Col>
             </Row>
@@ -92,13 +93,13 @@ export default class Landing extends Component {
                 <Col sm={4}>
                     <FormGroup>
                         <Label for="city">City</Label>
-                        <Input onChange={(e) => Handler(e)} type="text" name="city" id="city" placeholder="City"/>
+                        <Input onChange={(e) => this.setState({city:Handler(e)})} type="text" name="city" id="city" placeholder="City"/>
                     </FormGroup>
                 </Col>
                 <Col sm={4}>
                     <FormGroup>
                         <Label for="country">Country</Label>
-                        <Input onChange={(e) => Handler(e)} type="text" name="country" id="country" placeholder="Country"/>
+                        <Input onChange={(e) => this.setState({country:Handler(e)})} type="text" name="country" id="country" placeholder="Country"/>
                     </FormGroup>
                 </Col>
             </Row>

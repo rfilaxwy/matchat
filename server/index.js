@@ -14,25 +14,46 @@ require('dotenv').config();
 
 app.use(cors());
 app.use(bodyParser.json());
+app.use(session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: true }
+  }))
+  
+const port = process.env.SERVER_PORT;
+
+massive(process.env.CONNECTION_STRING)
+    .then(db => {
+        app.set('db', db);
+        app.listen(port, () => {
+            console.log(`Listening on port ${port}`);
+    });
+    }).catch(err => {
+        console.log('Error connection to database.', err.message);
+});
 
 
 //Auth0
-app.use(session({
-    secret: 'blitzkreigDongleSnapper 457&8',
-    resave: false,
-    saveUninitialized:false
-}))
+// app.use(session({
+//     secret: 'blitzkreigDongleSnapper 457&8',
+//     resave: false,
+//     saveUninitialized:false
+// }))
 
 app.use(passport.initialize() );
-app.use(passport.session() );
+// app.use(passport.session() );
+
+
 
 passport.use( new Auth0Strategy({
     domain: process.env.DOMAIN,
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
-    callBackURL: 'http://localhost:3000/dashboard'
+    callbackURL: process.env.CALLBACK_URL,
+    scope: 'openid email profile'
 },
-function(accessToken, refreshToken, extraParams, profile, done){
+(accessToken, refreshToken, extraParams, profile, done) => {
     return done(null, profile);
     }
 ) );
@@ -54,6 +75,9 @@ app.get('/login',
 );
 
 passport.serializeUser( (user,done) => {
+    if(!user) {
+        done('No user');
+    }
     done(null, 
         {
         clientID: user.id,
@@ -69,20 +93,8 @@ passport.deserializeUser((obj, done)=>{
 
 //////////////////////////////
 
-
-const port = process.env.SERVER_PORT;
-
-massive(process.env.CONNECTION_STRING).then(db => {
-    app.set('db', db);
-    app.listen(port, () => {
-        console.log(`Listening on port ${port}`)
-    });
-}).catch(err => {
-    console.log('Error connection to database.', err.message)
-});
-
 //ENDPOINTS
 
 
-app.get('/login', controller.read);
+
 app.put('/api/register',controller.post);
