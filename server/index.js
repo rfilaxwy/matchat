@@ -2,8 +2,11 @@ const express = require('express'),
   cors = require('cors'),
   bodyParser = require('body-parser'),
   massive = require('massive'),
-  controller = require(__dirname+'/controller.js'),
+  controller = require(__dirname + '/controller.js'),
+  localStrat = require(__dirname + '/localStrat.js'),
   passport = require('passport'),
+  LocalStrategy = require('passport-local').Strategy,
+  bcrypt = require('bcrypt'),
   session = require('express-session'),
   Auth0Strategy = require('passport-auth0'),
   app = express();
@@ -20,7 +23,16 @@ app.use(session({
     saveUninitialized: true,
     cookie: { secure: true }
   }))
+
+  app.use(passport.initialize() );
+  app.use(passport.session() );
   
+
+
+
+
+
+
 const port = process.env.SERVER_PORT;
 
 massive(process.env.CONNECTION_STRING)
@@ -34,39 +46,31 @@ massive(process.env.CONNECTION_STRING)
 });
 
 
-//Auth0
-// app.use(session({
-//     secret: 'blitzkreigDongleSnapper 457&8',
-//     resave: false,
-//     saveUninitialized:false
-// }))
 
-app.use(passport.initialize() );
-// app.use(passport.session() );
+//Passport auth
+passport.use('/login', new LocalStrategy({
+    usernameField: 'username',
+    passReqToCallback: true,
+}, (req, username, password, done) => {
+    const db = req.app.get('db');
+    db.users_all.findOne({ username: username })
+    .then(user => {
+        if(!user || !bcrypt.comparSync(password, user.password)){
+           return done('Invalid email or password.')
+        }
+        delete user.password;
+        done(null, user);
+    })
+    .then((user) => {
+        delete user.password;
+        done(null, user);
+    })
+    .catch(err => {
+        done(err);
+    })
+})
+)
 
-
-
-passport.use( new Auth0Strategy({
-    domain: process.env.DOMAIN,
-    clientID: process.env.CLIENT_ID,
-    clientSecret: process.env.CLIENT_SECRET,
-    callbackURL: process.env.CALLBACK_URL,
-    scope: 'openid email profile'
-},
-(accessToken, refreshToken, extraParams, profile, done) => {
-    return done(null, profile);
-    }
-) );
-
-app.get('/callback', 
-  passport.authenticate('auth0', {failureRedirect:'/login' }),
-  function(req, res) {
-      if(!req.user) {
-          throw new Error('user null');
-      }
-      res.redirect('/');
-  }
-);
 
 app.get('/login',
   passport.authenticate('auth0', {}), function(req, res) {
