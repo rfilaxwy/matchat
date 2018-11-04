@@ -24,9 +24,7 @@ export default class Login extends Component {
     }
     
     login(){
-        debugger
         axios.get('/api/login').then(res => {
-            debugger
             console.log(res);
         }
       );
@@ -59,12 +57,10 @@ export default class Login extends Component {
                             onChange={(e) => this.setState({password:Handler(e)})}
                             />
                     </Col>
-                </FormGroup>
-                <Link to="/login">
-                    <Button>Login</Button>
-                </Link>
+                </FormGroup>   
+                <Button onClick={this.login}>Login</Button>
                 <Link to="/">
-                    <Button onClick={this.login}>Cancel</Button>
+                    <Button onClick={this.cancel}>Cancel</Button>
                 </Link>  
             </Form>
         )

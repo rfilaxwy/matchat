@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import './index.scss';
 
 import {Link} from 'react-router-dom';
-
+import axios from 'axios'
 //Bootstrap/Reactstrap
 import { Col, Button, Form, FormGroup, Label, Input, Row } from 'reactstrap';
 
@@ -20,39 +20,24 @@ export default class Landing extends Component {
             password:'',
             city:'',
             country:''
-        }
-        this.handleChange = this.handleChange.bind(this);
-        
+        }   
+        this.register = this.register.bind(this);     
     }
 
-    handleChange(event){
-        let input = event.target.name;
-        let val = event.target.value;
-        console.log(val)
-        switch (input){
-            case 'firstname':
-                this.setState({firstname:val});
-                break;
-            case 'username':
-                this.setState({username:val});
-                break;
-            case 'email':
-                this.setState({email:val});
-                break;
-            case 'password':
-                this.setState({password:val});
-                break;
-            case 'city':
-                this.setState({city:val});
-                break;
-            case 'country':
-                this.setState({country:val});
-                break;
-            default:
-                break;
-        }
+    register(){
+        const {firstname,username,email,password,city,country} = this.state;
+        axios.post('/api/register',{firstname,username,email,password,city,country}).then(res => {
+           debugger
+            console.log(res)
+            if(res.data){
+                alert('Successful registraion please login.')
+                this.props.history.push('/login')
+            } else {
+                alert('Email and username already exist.')
+                this.props.history.push('/register');
+            } 
+        });
     }
-
 
 
     render(){
@@ -62,8 +47,8 @@ export default class Landing extends Component {
             <Col sm={2} />
                 <Col sm={4}>
                     <FormGroup>
-                        <Label for="firstName">First name</Label>
-                        <Input onChange={(e) => this.setState({firstname:Handler(e)})} type="firstName" name="firstName" id="firstName" placeholder="First name" />
+                        <Label for="firstname">First name</Label>
+                        <Input onChange={(e) => this.setState({firstname:Handler(e)})} type="firstname" name="firstname" id="firstname" placeholder="First name" />
                     </FormGroup>
                 </Col>
                 <Col sm={4}>
@@ -103,9 +88,7 @@ export default class Landing extends Component {
                     </FormGroup>
                 </Col>
             </Row>
-            <Link to="/login">
-                <Button>Submit</Button>
-            </Link>
+                <Button onClick={this.register}>Submit</Button>
             <Link to="/">
                 <Button>Cancel</Button>
             </Link>

@@ -1,15 +1,13 @@
 const express = require('express'),
-  cors = require('cors'),
-  bodyParser = require('body-parser'),
-  massive = require('massive'),
-  controller = require(__dirname + '/controller.js'),
-  localStrat = require(__dirname + '/localStrat.js'),
-  passport = require('passport'),
-  LocalStrategy = require('passport-local').Strategy,
-  bcrypt = require('bcrypt'),
-  session = require('express-session'),
-  Auth0Strategy = require('passport-auth0'),
-  app = express();
+    cors = require('cors'),
+    bodyParser = require('body-parser'),
+    massive = require('massive'),
+    controller = require(__dirname + '/controller.js'),
+    passport = require('passport'),
+    LocalStrategy = require('passport-local').Strategy,
+    bcrypt = require('bcrypt'),
+    session = require('express-session'),
+    app = express();
 
 require('dotenv').config();
 
@@ -17,18 +15,14 @@ require('dotenv').config();
 
 app.use(cors());
 app.use(bodyParser.json());
-app.use(session({
-    secret: 'keyboard cat',
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: true }
-  }))
+// app.use(session({
+//     secret: 'keyboard cat',
+//     resave: false,
+//     saveUninitialized: true
+// }))
 
-  app.use(passport.initialize() );
-  app.use(passport.session() );
-  
-
-
+app.use(passport.initialize());
+app.use(passport.session());
 
 
 
@@ -40,59 +34,44 @@ massive(process.env.CONNECTION_STRING)
         app.set('db', db);
         app.listen(port, () => {
             console.log(`Listening on port ${port}`);
-    });
+        });
     }).catch(err => {
         console.log('Error connection to database.', err.message);
-});
-
-
-
-//Passport auth
-passport.use('/login', new LocalStrategy({
-    usernameField: 'username',
-    passReqToCallback: true,
-}, (req, username, password, done) => {
-    const db = req.app.get('db');
-    db.users_all.findOne({ username: username })
-    .then(user => {
-        if(!user || !bcrypt.comparSync(password, user.password)){
-           return done('Invalid email or password.')
-        }
-        delete user.password;
-        done(null, user);
-    })
-    .then((user) => {
-        delete user.password;
-        done(null, user);
-    })
-    .catch(err => {
-        done(err);
-    })
-})
-)
-
-
-app.get('/login',
-  passport.authenticate('auth0', {}), function(req, res) {
-  res.redirect('/');
-  }
-);
-
-passport.serializeUser( (user,done) => {
-    if(!user) {
-        done('No user');
-    }
-    done(null, 
-        {
-        clientID: user.id,
-        email:user._json.email,
-        name: user._json.name 
     });
-});
 
-passport.deserializeUser((obj, done)=>{
-    done(null,obj);
-});
+
+
+// //Passport auth
+// passport.use('login', new LocalStrategy({
+//     usernameField: 'username',
+//     passReqToCallback: true,
+// }, (req, username, password, done) => {
+//     const db = req.app.get('db');
+//     db.users.findOne({ username: username })
+//         .then(user => {
+//             if (!user ) {
+//                 //|| !bcrypt.compareSync(password, user.password)
+//                 return done('Invalid email or password.')
+//             }
+//             delete user.password;
+//             done(null, user);
+//         }).catch(err => {
+//             done(err);
+//         })
+//     })
+// );
+
+
+// passport.serializeUser((user, done) => {
+//     if (!user) {
+//         done('No user');
+//     }
+//     done(null, user);
+// });
+
+// passport.deserializeUser((obj, done) => {
+//     done(null, obj);
+// });
 
 
 //////////////////////////////
@@ -100,5 +79,10 @@ passport.deserializeUser((obj, done)=>{
 //ENDPOINTS
 
 
+//Register new user.
+app.post('/api/register', controller.post);
 
-app.put('/api/register',controller.post);
+// app.get('/test', (req, res)=>{res.send(req.user)})
+// app.post('/login', passport.authenticate(['login']), (req, res, next) => {
+//     res.send('Successful login.')
+// })
