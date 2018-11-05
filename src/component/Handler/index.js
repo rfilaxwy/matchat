@@ -1,7 +1,6 @@
 export default function Handler(props){
     let input = props.target.name;
     let val = props.target.value;
-    console.log(input)
     switch (input){
         case 'firstname':
             return val;

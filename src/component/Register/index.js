@@ -27,8 +27,6 @@ export default class Landing extends Component {
     register(){
         const {firstname,username,email,password,city,country} = this.state;
         axios.post('/api/register',{firstname,username,email,password,city,country}).then(res => {
-           debugger
-            console.log(res)
             if(res.data){
                 alert('Successful registraion please login.')
                 this.props.history.push('/login')

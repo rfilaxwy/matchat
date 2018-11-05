@@ -82,6 +82,9 @@ massive(process.env.CONNECTION_STRING)
 //Register new user.
 app.post('/api/register', controller.post);
 
+//Login user.
+app.post('/api/login', controller.read);
+
 // app.get('/test', (req, res)=>{res.send(req.user)})
 // app.post('/login', passport.authenticate(['login']), (req, res, next) => {
 //     res.send('Successful login.')
