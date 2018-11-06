@@ -8,7 +8,7 @@ module.exports = {
         db.check_exist(username, email).then((result) => {
             if(result.length===0){
                 db.register_user(firstname, username, email, password, city, country).then(result => {
-                    res.status(200).send(true);
+                   res.status(200).send(true);
                 })
             } else {
                 res.status(200).send(false);
@@ -20,9 +20,8 @@ module.exports = {
         let {username, password} = req.body;
         //need to add bcrpyt comparesync
         db.login_check(username,password).then(result => {
-            console.log(result)
             if(result.length>0) {
-                res.status(200).send(true);
+                res.status(200).send(result);
             } else {
                 res.status(200).send(false);
             }

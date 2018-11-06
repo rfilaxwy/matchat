@@ -38,11 +38,17 @@ export default class Landing extends Component {
                     <NavbarToggler onClick={this.toggle} />
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="ml-auto" navbar>
-                            <NavItem>
-                                <NavLink href="/components/">Components</NavLink>
+                        <NavItem>
+                                <NavLink href="/calendar">Calendar</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
+                                <NavLink href="/dashboard">Dashboard</NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink href="/search">Search</NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink href="/">Log out</NavLink>
                             </NavItem>
                             <UncontrolledDropdown nav inNavbar>
                                 <DropdownToggle nav caret>
@@ -50,10 +56,16 @@ export default class Landing extends Component {
                                 </DropdownToggle>
                                 <DropdownMenu right>
                                 <DropdownItem>
-                                    Option 1
+                                    <NavLink href="/calendar">Calendar</NavLink>
                                 </DropdownItem>
                                 <DropdownItem>
-                                    Option 2
+                                    <NavLink href="/dashboard">Dashboard</NavLink>
+                                </DropdownItem>
+                                <DropdownItem>
+                                    <NavLink href="/search">Search</NavLink>
+                                </DropdownItem>
+                                <DropdownItem>
+                                    <NavLink href="/">Log out</NavLink>
                                 </DropdownItem>
                                 <DropdownItem divider />
                                 <DropdownItem>

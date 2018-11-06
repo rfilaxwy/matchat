@@ -2,7 +2,9 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
 
-
+//Redux
+import {connect} from 'react-redux';
+import {getUser} from '../../ducks/reducer';
 //Custom
 import Handler from '../Handler';
 
@@ -12,7 +14,7 @@ import auth0 from 'auth0-js';
 //Bootstrap/Reactstrap
 import { Col, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
-export default class Login extends Component {
+class Login extends Component {
     constructor(){
         super();
         this.state = {
@@ -28,14 +30,12 @@ export default class Login extends Component {
         const {username, password} = this.state;
         debugger
         axios.post('/api/login',{username, password}).then(res => {
-            debugger
-            console.log(res.data)
             if(res.data){
-                debugger
+                const {firstname,username,city,country} = res.data[0];
+                this.props.getUser(firstname,username,city,country);            
                 this.props.history.push('/dashboard');
             } else {
-                debugger
-                this.setState({username:'',password:''})
+                this.setState({username:'', password:''})
                 this.setState({alert:'Username password combination not found.'});
             }
         }
@@ -83,3 +83,5 @@ export default class Login extends Component {
         )
     }
 }
+
+export default connect(null, {getUser})(Login);

@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import './index.scss';
 
 import {Link} from 'react-router-dom';
+
+
 import axios from 'axios'
 //Bootstrap/Reactstrap
 import { Col, Button, Form, FormGroup, Label, Input, Row } from 'reactstrap';
@@ -19,7 +21,8 @@ export default class Landing extends Component {
             email:'',
             password:'',
             city:'',
-            country:''
+            country:'',
+            userid:'',
         }   
         this.register = this.register.bind(this);     
     }
