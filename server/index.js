@@ -80,7 +80,7 @@ massive(process.env.CONNECTION_STRING)
 
 
 //Register new user.
-app.post('/api/register', controller.post);
+app.post('/api/register', controller.create);
 
 //Login user.
 app.post('/api/login', controller.read);
@@ -88,6 +88,13 @@ app.post('/api/login', controller.read);
 //Get user profile
 app.post('/api/profile', controller.readBio);
 
+//Update and/or add user bio and interests
+app.put('/api/update', controller.post);
+
+//Delete user
+app.delete('/api/user', controller.delete);
+
+// AUTH STUFF TO BE SET UP STILL
 // app.get('/test', (req, res)=>{res.send(req.user)})
 // app.post('/login', passport.authenticate(['login']), (req, res, next) => {
 //     res.send('Successful login.')

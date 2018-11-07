@@ -54,18 +54,22 @@ class Landing extends Component {
                 this.setState({interestOne:interestOne});
                 break;
             case 2:
-                document.getElementById('itwo').contentEditable = true;
+                document.getElementById('itwo').contentEditable = false;
                 const interestTwo = document.getElementById('itwo').innerHTML;
                 this.setState({interestTwo:interestTwo});
                 break;
             case 3:
-                document.getElementById('ithree').contentEditable = true;
+                document.getElementById('ithree').contentEditable = false;
                 const interestThree = document.getElementById('ithree').innerHTML;
                 this.setState({interestThree:interestThree});
                 break;
             default:
                 break;
         }   
+    }
+
+    update(){
+        // axios.put
     }
 
     render(){
@@ -81,6 +85,7 @@ class Landing extends Component {
                 </div>
                 <div className='bioCard'>
                     <section>
+                        BIO:
                         {this.state.bio}
                     </section>
                 </div>

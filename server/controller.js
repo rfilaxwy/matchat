@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 
 module.exports = {
-    post: (req, res, next) => {
+    create: (req, res, next) => {
         const db = req.app.get('db');
         let {firstname, username, email, password, city, country} = req.body;
         // password = bcrypt.hash(password,10);
@@ -34,7 +34,33 @@ module.exports = {
         db.get_user_profile(userid).then(result => {
             res.status(200).send(result);
         })
-    }
-    // delete: (res, res) => {
-    // },
+    },
+    post: (req, res, next) => {
+        const db = req.app.get('db');
+        const {bio, interest1, interest2, interest3, userid} = req.body;
+        db.get_user_profile(userid).then(result => {
+            if(result.length > 0) {
+                db.profile_update(bio, interest1, interest2, interest3).then(result => {
+                    db.get_user_profile(userid).then(result =>{
+                        res.status(200).send(result);
+                    });
+                });
+            } else {
+                db.new_profile(userid, bio, interest1, interest2, interest3).then(result => {
+                    db.get_user_profile(userid).then(result =>{
+                        res.status(200).send(result);
+                    });
+                });
+            }
+        }
+            )
+    },
+    delete: (req, res) => {
+        const db = req.app.get('db');
+        const {userid} = req.body;
+        db.delete_user(userid).then(result => {
+            res.status(200).send(result);
+        })
+
+    },
 }
