@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt');
+
 module.exports = {
     post: (req, res, next) => {
         const db = req.app.get('db');
@@ -26,6 +27,13 @@ module.exports = {
                 res.status(200).send(false);
             }
         } );
+    },
+    readBio: (req, res, next) => {
+        const db = req.app.get('db');
+        const {userid} = req.body;
+        db.get_user_profile(userid).then(result => {
+            res.status(200).send(result);
+        })
     }
     // delete: (res, res) => {
     // },

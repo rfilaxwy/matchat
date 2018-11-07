@@ -1,7 +1,7 @@
 const initialState = {
     firstname:'',
     username:'',
-    userID:'',
+    userid:'',
     city:'',
     country:'',
     interestsOne:'',
@@ -32,7 +32,8 @@ function reducer (state = initialState, action) {
                 username:payload.username,
                 email:payload.email,
                 city:payload.city,
-                country:payload.country
+                country:payload.country,
+                userid:payload.userid
             })
         case LOGIN_USER:
             return Object.assign({}, state, {
@@ -45,18 +46,18 @@ function reducer (state = initialState, action) {
     }
 };
 
-export function updateBio (userID,bio) {
+export function updateBio (userid,bio) {
     return {
         type: UPDATE_BIO,
-        payload: {userID, bio}
+        payload: {userid, bio}
     }
 };
 
-export function addInterest (userID, interestOne, interestTwo, interestThree) {
+export function addInterest (userid, interestOne, interestTwo, interestThree) {
     return {
         type: ADD_INTEREST,
         payload: {
-            userID,
+            userid,
             interestOne,
             interestTwo,
             interestThree
@@ -64,14 +65,15 @@ export function addInterest (userID, interestOne, interestTwo, interestThree) {
     }
 };
 
-export function getUser (firstname, username, city, country) {
+export function getUser (firstname, username, city, country,userid) {
     return {
         type: GET_USER,
         payload: {
             firstname,
             username,
             city,
-            country
+            country,
+            userid
         }
     }
 };
