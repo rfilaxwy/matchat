@@ -11,15 +11,15 @@ const express = require('express'),
 
 require('dotenv').config();
 
-
+const {SESSION_SECRET} = process.env;
 
 app.use(cors());
 app.use(bodyParser.json());
-// app.use(session({
-//     secret: 'keyboard cat',
-//     resave: false,
-//     saveUninitialized: true
-// }))
+app.use(session({
+    secret: SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true
+}))
 
 app.use(passport.initialize());
 app.use(passport.session());

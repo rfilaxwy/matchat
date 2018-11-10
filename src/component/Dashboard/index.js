@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 
 import {connect} from 'react-redux';
 import axios from 'axios';
+import {Button, Modal, ModalBody, ModalFooter} from 'reactstrap';
+import './index.scss';
 
 class Landing extends Component {
     constructor(){
@@ -12,13 +14,16 @@ class Landing extends Component {
             interstOne:'',
             interstTwo:'',
             interstThree:'',
-            profilePicture:''
-        }
+            profilePicture:'',
+            userid:'',
+            toggle:false
+            }
+        this.update = this.update.bind(this);
+        this.toggle = this.toggle.bind(this);
         
     }
     componentDidMount(){
         const {userid}=this.props;
-        debugger
         axios.post('/api/profile',{userid}).then(res => {
             console.log(res.data)
             const {bio, interest_1, interest_2, interest_3} = res.data[0];
@@ -26,7 +31,8 @@ class Landing extends Component {
                 bio:bio, 
                 interestOne:interest_1, 
                 interestTwo:interest_2, 
-                interestThree:interest_3
+                interestThree:interest_3,
+                userid:userid,
             })
         })
     }
@@ -40,6 +46,9 @@ class Landing extends Component {
                 break;
             case 3:
                 document.getElementById('ithree').contentEditable = true;
+                break;
+            case 4:
+                document.getElementById('bio').contentEditable = true;
                 break;
             default:
                 break;
@@ -63,15 +72,34 @@ class Landing extends Component {
                 const interestThree = document.getElementById('ithree').innerHTML;
                 this.setState({interestThree:interestThree});
                 break;
+            case 4:
+                document.getElementById('bio').contentEditable = false;
+                const bio = document.getElementById('bio').innerHTML;
+                this.setState({bio:bio});
+                break;
             default:
                 break;
         }   
     }
 
     update(){
-        // axios.put
+        const {userid, bio, interestOne, interestTwo, interestThree}= this.state;
+        axios.put('/api/update', {userid, bio, interestOne, interestTwo, interestThree}).then(res => {
+            console.log(res.data)
+        })
+    }
+    delete(){
+        const {userid} = this.state;
+        axios.delete('/api/user',{userid}).then(results => {
+            this.props.push('/');
+        })
     }
 
+    toggle() {
+        this.setState({
+          modal: !this.state.modal
+        });
+      }
     render(){
         const {username, city, country}= this.props;
         return(
@@ -79,18 +107,27 @@ class Landing extends Component {
                 <h2>Welcome {username} from {city}, {country}</h2>
 
                 <div className="interestCard">
-                    <div id='ione'>Interest 1:{this.state.interestOne}</div><span onClick={()=>{this.editInterest(1)}}>Edit</span> <span onClick={()=>{this.save(1)}}>Save</span>
-                    <div id='itwo'>Interest 2:{this.state.interestTwo}</div><span onClick={()=>{this.editInterest(2)}}>Edit</span> <span onClick={()=>{this.save(2)}}>Save</span>
-                    <div id='ithree'>Interest 3: {this.state.interestThree}</div><span onClick={()=>{this.editInterest(3)}}>Edit</span> <span onClick={()=>{this.save(3)}}>Save</span>
+                    <div>Interest 1:<div className='inputs' id='ione'>{this.state.interestOne}</div><span onClick={()=>{this.editInterest(1)}}>Edit</span> <span onClick={()=>{this.save(1)}}>Save</span></div> 
+                    <div>Interest 2:<div className='inputs' id='itwo'>{this.state.interestTwo}</div><span onClick={()=>{this.editInterest(2)}}>Edit</span> <span onClick={()=>{this.save(2)}}>Save</span></div>
+                    <div>Interest 3:<div className='inputs' id='ithree'>{this.state.interestThree}</div><span onClick={()=>{this.editInterest(3)}}>Edit</span> <span onClick={()=>{this.save(3)}}>Save</span></div>
                 </div>
                 <div className='bioCard'>
                     <section>
-                        BIO:
-                        {this.state.bio}
+                        <div>BIO:<div className='inputs inputsBio'id='bio'>{this.state.bio}</div><span onClick={()=>{this.editInterest(4)}}>Edit</span><span onClick={()=>{this.save(4)}}>Save</span></div>
                     </section>
                 </div>
-                <button onClick={this.props.update}>Update</button>
-
+                <Button onClick={this.update}>Update</Button>
+                
+                <Button color="danger" onClick={this.toggle}>Delete Profile</Button>
+                <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+                    <ModalBody>
+                       Are you sure you want to delete, forever, your profile?
+                    </ModalBody>
+                    <ModalFooter>
+                        <Button color="primary" onClick={this.delete}>Blow it away</Button>{' '}
+                        <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+                    </ModalFooter>
+                </Modal>
             </div>
         )
     }

@@ -1,2 +1,6 @@
-INSERT INTO profile(bio, interest_1, interest_2, interest_3)
-VALUES($1, $2, $3, $4);
+UPDATE profile
+SET bio=$1,
+interest_1= $2,
+interest_2 = $3,
+interest_3 = $4
+WHERE userid= $5;

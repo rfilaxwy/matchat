@@ -1,0 +1,16 @@
+span{
+    padding-right: 3px;
+    &:hover{
+        color:blue;
+    }
+}
+
+.inputs {
+    width:250px;
+    height:25px;
+    margin:auto;
+    background-color:rgb(240, 238, 238);
+}
+.inputsBio{
+    height:150px;
+}

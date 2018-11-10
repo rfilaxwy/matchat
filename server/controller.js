@@ -32,21 +32,29 @@ module.exports = {
         const db = req.app.get('db');
         const {userid} = req.body;
         db.get_user_profile(userid).then(result => {
+            if(result.length<1){
+                res.status(200).send([{
+                    bio:'Add here',
+                    interest_1:'Add here',
+                    interest_2:'Add here',
+                    interest_3:'Add here'
+                }]);
+        } else{
             res.status(200).send(result);
-        })
+        }})
     },
     post: (req, res, next) => {
         const db = req.app.get('db');
-        const {bio, interest1, interest2, interest3, userid} = req.body;
+        const {bio, interestOne, interestTwo, interestThree, userid} = req.body;
         db.get_user_profile(userid).then(result => {
             if(result.length > 0) {
-                db.profile_update(bio, interest1, interest2, interest3).then(result => {
+                db.profile_update(bio, interestOne, interestTwo, interestThree, userid).then(result => {
                     db.get_user_profile(userid).then(result =>{
                         res.status(200).send(result);
                     });
                 });
             } else {
-                db.new_profile(userid, bio, interest1, interest2, interest3).then(result => {
+                db.new_profile(userid, bio, interestOne, interestTwo, interestThree).then(result => {
                     db.get_user_profile(userid).then(result =>{
                         res.status(200).send(result);
                     });
