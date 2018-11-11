@@ -20,12 +20,12 @@ class Landing extends Component {
             }
         this.update = this.update.bind(this);
         this.toggle = this.toggle.bind(this);
+        this.delete = this.delete.bind(this);
         
     }
     componentDidMount(){
         const {userid}=this.props;
         axios.post('/api/profile',{userid}).then(res => {
-            console.log(res.data)
             const {bio, interest_1, interest_2, interest_3} = res.data[0];
             this.setState({
                 bio:bio, 
@@ -90,8 +90,8 @@ class Landing extends Component {
     }
     delete(){
         const {userid} = this.state;
-        axios.delete('/api/user',{userid}).then(results => {
-            this.props.push('/');
+        axios.delete(`/api/user/${userid}`).then(results => {
+            this.props.history.push('/');
         })
     }
 
@@ -117,7 +117,6 @@ class Landing extends Component {
                     </section>
                 </div>
                 <Button onClick={this.update}>Update</Button>
-                
                 <Button color="danger" onClick={this.toggle}>Delete Profile</Button>
                 <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
                     <ModalBody>

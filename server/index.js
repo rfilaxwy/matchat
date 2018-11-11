@@ -11,6 +11,9 @@ const express = require('express'),
 
 require('dotenv').config();
 
+//Middleware
+const checkForSession = require('./checkForSession');
+
 const {SESSION_SECRET} = process.env;
 
 app.use(cors());
@@ -18,8 +21,11 @@ app.use(bodyParser.json());
 app.use(session({
     secret: SESSION_SECRET,
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: false
 }))
+
+
+// app.use(express.static(`${__dirname}/build`) );
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -92,7 +98,10 @@ app.post('/api/profile', controller.readBio);
 app.put('/api/update', controller.post);
 
 //Delete user
-app.delete('/api/user', controller.delete);
+app.delete('/api/user/:id', controller.delete);
+
+//Find matching interests
+app.post('/api/matches', controller.postMatches);
 
 // AUTH STUFF TO BE SET UP STILL
 // app.get('/test', (req, res)=>{res.send(req.user)})

@@ -14,6 +14,8 @@ export default function Handler(props){
             return val;
         case 'country':
             return val;
+        case 'interest':
+            return val;
         default:
             break;
     }
