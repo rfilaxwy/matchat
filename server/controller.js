@@ -2,7 +2,6 @@
 
 module.exports = {
     create: (req, res, next) => {
-        
         const db = req.app.get('db');
         let {firstname, username, email, password, city, country} = req.body;
         // password = bcrypt.hash(password,10);
@@ -28,7 +27,7 @@ module.exports = {
             } else {
                 res.status(200).send(false);
             }
-        } );
+        });
     },
     readBio: (req, res, next) => {
         const {session} = req;
@@ -91,8 +90,4 @@ module.exports = {
             res.status(200).send(result);
         })
     },
-    postMatches: (req, res) => {
-        const db = req.app.get('db');
-        
-    } 
 }

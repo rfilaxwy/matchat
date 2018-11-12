@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {allMatching, searchMatch} from './findAllMatches';
+import axios from 'axios';
 import {connect} from 'react-redux';
 import { 
     Button,
@@ -17,11 +17,12 @@ class Landing extends Component {
         super();
         this.state = {
             matches:[],
-            interst:'',
+            interest:'',
             dropdownOpen: false,
             splitButtonOpen: false
         }
         this.toggleDropDown = this.toggleDropDown.bind(this);
+        this.searchInterest = this.searchInterest.bind(this);
     }
 
     toggleDropDown() {
@@ -31,23 +32,35 @@ class Landing extends Component {
       }
 
     matchat(){
-        const {userid} = this.props
-        const matches = allMatching(userid);
-        this.setState({matches:matches})
+        const {userid} = this.props;
+        let matches = [];
+        axios.post(`/api/matches${userid}`).then( result => {
+                matches = result.data;
+                this.setState({matches:matches})
+            });        
       }
 
-    seartchInterst(){
-
+    searchInterest(){
+        const {interest} = this.state;
+        let matches= [];
+        axios.post('/api/match', {interest}).then(result => {
+            matches = result.data;
+            this.setState({matches:matches});
+            })
       }
 
     render(){
         const {matches} = this.state;
-        const matchDisplay = matches.map((key, index) => {
-            return <div value={key}>
-                {key.username}
-                {key.bio}
-            </div>
-        })
+        const matchDisplay = matches.map((match, i) => {
+            return(
+                <div value={i} >
+                    {match.bio}
+                    {match.interest_1}
+                    {match.interest_2}
+                    {match.interest_3}
+                </div>
+            )
+        })       
         return(
             <div>
                 <h2>Search</h2>
@@ -55,23 +68,26 @@ class Landing extends Component {
                 {/* Get all users with matching interest(s)
                 or search for an interst */}
                 <InputGroup >
-                    <InputGroupAddon  addonType="prepend"><Button>Search @ </Button></InputGroupAddon>
-                    <Input name='interest' placeholder='Chat interest' onChange={(e)=>{this.setState({interst:Handler(e)})}}/>
+                    <InputGroupAddon  addonType="prepend"><Button onClick={this.searchInterest}>Search @ </Button></InputGroupAddon>
+                    <Input name='interest' placeholder='Chat interest' onChange={(e)=>{this.setState({interest:Handler(e)})}}/>
                 </InputGroup>
-
+                {matchDisplay}
                 
             </div>
         )
     }
 }
 function mapStateToProps (state) {
-    const { username, firstname, city, country, userid } = state;
+    const { username, firstname, city, country, userid, interest_1, interest_2, interest_3 } = state;
     return {
         username,
         firstname,
         city,
         country,
-        userid
+        userid,
+        interest_1,
+        interest_2,
+        interest_3
     }
 }
 export default connect(mapStateToProps, {})(Landing);

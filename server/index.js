@@ -3,6 +3,7 @@ const express = require('express'),
     bodyParser = require('body-parser'),
     massive = require('massive'),
     controller = require(__dirname + '/controller.js'),
+    interestController = require(__dirname + '/interestController.js'),
     passport = require('passport'),
     LocalStrategy = require('passport-local').Strategy,
     bcrypt = require('bcrypt'),
@@ -100,8 +101,11 @@ app.put('/api/update', controller.post);
 //Delete user
 app.delete('/api/user/:id', controller.delete);
 
-//Find matching interests
-app.post('/api/matches', controller.postMatches);
+//Find search input interest
+app.post('/api/match', interestController.post);
+
+//Find all that match any of users interests
+app.get('/api/matches/:id', interestController.read);
 
 // AUTH STUFF TO BE SET UP STILL
 // app.get('/test', (req, res)=>{res.send(req.user)})

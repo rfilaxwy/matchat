@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-
+import {addInterest} from '../../ducks/reducer';
 import {connect} from 'react-redux';
 import axios from 'axios';
 import {Button, Modal, ModalBody, ModalFooter} from 'reactstrap';
@@ -27,6 +27,7 @@ class Landing extends Component {
         const {userid}=this.props;
         axios.post('/api/profile',{userid}).then(res => {
             const {bio, interest_1, interest_2, interest_3} = res.data[0];
+            addInterest(interest_1, interest_2, interest_3)
             this.setState({
                 bio:bio, 
                 interestOne:interest_1, 
@@ -85,7 +86,7 @@ class Landing extends Component {
     update(){
         const {userid, bio, interestOne, interestTwo, interestThree}= this.state;
         axios.put('/api/update', {userid, bio, interestOne, interestTwo, interestThree}).then(res => {
-            console.log(res.data)
+            console.log(res.data);
         })
     }
     delete(){
@@ -142,4 +143,4 @@ function mapStateToProps (state) {
         userid
     }
 }
-export default connect(mapStateToProps, {})(Landing);
+export default connect(mapStateToProps, {addInterest})(Landing);
