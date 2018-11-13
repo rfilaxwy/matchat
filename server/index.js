@@ -88,7 +88,7 @@ passport.deserializeUser((obj, done) => {
 app.post('/api/register', controller.create);
 
 // //Login user.
-// app.post('/api/login', controller.read);
+app.post('/api/login', controller.read);
 
 //Get user profile
 app.post('/api/profile', controller.readBio);

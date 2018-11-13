@@ -5,10 +5,19 @@
 }
 .container{
     display:flex;
+    flex-wrap: wrap;
+    align-items:center;
+    justify-content:center;
 }
 .interestCard{
     border:$card-border;
     box-shadow:$card-shadow;
     background-image:$card-color;
     margin:4px;
+    box-sizing:border-box;
+    width: 30%;
+    height: 325px;
+    padding:5px;
+    justify-content: center;
+    align-items:center;
 }

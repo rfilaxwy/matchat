@@ -26,7 +26,8 @@ class Landing extends Component {
     componentDidMount(){
         const {userid}=this.props;
         axios.post('/api/profile',{userid}).then(res => {
-            const {bio, interest_1, interest_2, interest_3} = res.data[0];
+            console.log(res.data)
+            const {bio, interest_1, interest_2, interest_3} = res.data;
             addInterest(interest_1, interest_2, interest_3)
             this.setState({
                 bio:bio, 

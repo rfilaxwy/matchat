@@ -30,9 +30,8 @@ module.exports = {
         });
     },
     readBio: (req, res, next) => {
-        const {user} = req;
+        const {userid} = req.body;
         const db = req.app.get('db');
-        const {userid} = user;
         db.get_user_profile(userid).then(result => {
             if(result.length<1){
                 res.status(200).send([{
@@ -42,7 +41,7 @@ module.exports = {
                     interest_3:''
                 }]);
         } else{
-            res.status(200).send(result);
+            res.status(200).send(result[0]);
         }})
     },
     post: (req, res, next) => {
