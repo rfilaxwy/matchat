@@ -1,3 +1,5 @@
+@import '../../variables';
+
 span{
     padding-right: 3px;
     &:hover{
@@ -13,4 +15,20 @@ span{
 }
 .inputsBio{
     height:150px;
+}
+.butt {
+    margin-top:5px !important;
+    margin:auto;
+    width:130px;
+}
+
+@media only screen and (max-width: $break-large) {
+    .shrink{
+        visibility:hidden;
+    }
+    .butt{
+        display:block !important;
+        
+        margin: 5px auto;
+    }
 }

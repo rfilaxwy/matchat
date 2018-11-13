@@ -6,3 +6,28 @@ span {
     color: $matLogo;
     font-weight:800;
 }
+
+
+
+@media only screen and (min-width: $break-small) {
+    #navBar{
+        background-color:rgba(219, 201, 201, 0.2)!important;
+    }
+}
+@media only screen and (max-width: $break-large) {
+    #navBar{
+        background-color: rgba(204, 180, 180, 0.637) !important;
+    }
+}
+.card{
+    margin-top:20px !important;
+}
+.interestCard{
+    font-weight:700;
+    color: $headColor;
+
+}
+.bioCard {
+    color: $headColor;
+    font-size: 1.3em;
+}

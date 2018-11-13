@@ -9,10 +9,7 @@ import {
     Nav,
     NavItem,
     NavLink,
-    UncontrolledDropdown,
-    DropdownToggle,
-    DropdownMenu,
-    DropdownItem } from 'reactstrap';
+    } from 'reactstrap';
 
 export default class Landing extends Component {
     constructor(){
@@ -33,12 +30,12 @@ export default class Landing extends Component {
 
         return(
             <div>
-                <Navbar color="light" light expand="md">
+                <Navbar id='navBar' color="light" light expand="md">
                     <NavbarBrand href="/">Mat<span>Chat</span></NavbarBrand>
                     <NavbarToggler onClick={this.toggle} />
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="ml-auto" navbar>
-                        <NavItem>
+                            <NavItem>
                                 <NavLink href="/calendar">Calendar</NavLink>
                             </NavItem>
                             <NavItem>
@@ -50,29 +47,6 @@ export default class Landing extends Component {
                             <NavItem>
                                 <NavLink href="/">Log out</NavLink>
                             </NavItem>
-                            <UncontrolledDropdown nav inNavbar>
-                                <DropdownToggle nav caret>
-                                Options
-                                </DropdownToggle>
-                                <DropdownMenu right>
-                                <DropdownItem>
-                                    <NavLink href="/calendar">Calendar</NavLink>
-                                </DropdownItem>
-                                <DropdownItem>
-                                    <NavLink href="/dashboard">Dashboard</NavLink>
-                                </DropdownItem>
-                                <DropdownItem>
-                                    <NavLink href="/search">Search</NavLink>
-                                </DropdownItem>
-                                <DropdownItem>
-                                    <NavLink href="/">Log out</NavLink>
-                                </DropdownItem>
-                                <DropdownItem divider />
-                                <DropdownItem>
-                                    Reset
-                                </DropdownItem>
-                                </DropdownMenu>
-                            </UncontrolledDropdown>
                         </Nav>
                     </Collapse>
                 </Navbar>

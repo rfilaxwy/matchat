@@ -104,8 +104,8 @@ class Landing extends Component {
     render(){
         const {username, city, country}= this.props;
         return(
-            <div>
-                <h2>Welcome {username} from {city}, {country}</h2>
+            <div className='card'>
+                <h2>Welcome {username} <span className='shrink'>from {city}, {country}</span></h2>
 
                 <div className="interestCard">
                     <div>Interest 1:<div className='inputs' id='ione'>{this.state.interestOne}</div><span onClick={()=>{this.editInterest(1)}}>Edit</span> <span onClick={()=>{this.save(1)}}>Save</span></div> 
@@ -117,8 +117,8 @@ class Landing extends Component {
                         <div>BIO:<div className='inputs inputsBio'id='bio'>{this.state.bio}</div><span onClick={()=>{this.editInterest(4)}}>Edit</span><span onClick={()=>{this.save(4)}}>Save</span></div>
                     </section>
                 </div>
-                <Button onClick={this.update}>Update</Button>
-                <Button color="danger" onClick={this.toggle}>Delete Profile</Button>
+                <Button className='butt' onClick={this.update}>Update</Button>
+                <Button className='butt' color="danger" onClick={this.toggle}>Delete Profile</Button>
                 <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
                     <ModalBody>
                        Are you sure you want to delete, forever, your profile?

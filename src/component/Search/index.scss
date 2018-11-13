@@ -1,0 +1,14 @@
+@import '../../variables';
+
+.card{
+    padding: 50px;
+}
+.container{
+    display:flex;
+}
+.interestCard{
+    border:$card-border;
+    box-shadow:$card-shadow;
+    background-image:$card-color;
+    margin:4px;
+}

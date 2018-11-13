@@ -30,18 +30,11 @@ module.exports = {
         });
     },
     readBio: (req, res, next) => {
-        const {session} = req;
-        session.user={}
+        const {user} = req;
         const db = req.app.get('db');
-        const {userid} = req.body;
+        const {userid} = user;
         db.get_user_profile(userid).then(result => {
             if(result.length<1){
-                session.user={
-                    bio:'',
-                    interest_1:'',
-                    interest_2:'',
-                    interest_3:''
-                }
                 res.status(200).send([{
                     bio:'',
                     interest_1:'',
@@ -49,11 +42,6 @@ module.exports = {
                     interest_3:''
                 }]);
         } else{
-            session.user.bio=result[0]['bio'];
-            session.user.interest_1=result[0]['interest_1'];
-            session.user.interest_2=result[0]['interest_2'];
-            session.user.interest_3=result[0]['interest_3'];
-            console.log(session.user);
             res.status(200).send(result);
         }})
     },

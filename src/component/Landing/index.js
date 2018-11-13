@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import './index.scss';
 
 //Custom
 import {Link} from 'react-router-dom';
@@ -10,13 +11,13 @@ export default class Landing extends Component {
 
     render(){
         return(
-            <div>
-                <h2>Landing</h2>
+            <div className='card'>
+                <h1>Mat<span>Chat</span></h1>
                 <Link to='/login'>
-                    <Button color='primary'>Login</Button>
+                    <Button className='butt' color='secondary'>Login</Button>
                 </Link>
                 <Link to='/register'>
-                    <Button color='primary'>Register</Button>
+                    <Button className='butt' color='secondary'>Register</Button>
                 </Link>
             </div>
         )

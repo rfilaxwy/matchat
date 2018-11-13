@@ -12,8 +12,6 @@ const express = require('express'),
 
 require('dotenv').config();
 
-//Middleware
-const checkForSession = require('./checkForSession');
 
 const {SESSION_SECRET} = process.env;
 
@@ -48,37 +46,37 @@ massive(process.env.CONNECTION_STRING)
 
 
 
-// //Passport auth
-// passport.use('login', new LocalStrategy({
-//     usernameField: 'username',
-//     passReqToCallback: true,
-// }, (req, username, password, done) => {
-//     const db = req.app.get('db');
-//     db.users.findOne({ username: username })
-//         .then(user => {
-//             if (!user ) {
-//                 //|| !bcrypt.compareSync(password, user.password)
-//                 return done('Invalid email or password.')
-//             }
-//             delete user.password;
-//             done(null, user);
-//         }).catch(err => {
-//             done(err);
-//         })
-//     })
-// );
+//Passport auth
+passport.use('login', new LocalStrategy({
+    usernameField: 'username',
+    passReqToCallback: true,
+}, (req, username, password, done) => {
+    const db = req.app.get('db');
+    db.users.findOne({ username: username })
+        .then(user => {
+            if (!user ) {
+                //|| !bcrypt.compareSync(password, user.password)
+                return done('Invalid email or password.')
+            }
+            delete user.password;
+            done(null, user);
+        }).catch(err => {
+            done(err);
+        })
+    })
+);
 
 
-// passport.serializeUser((user, done) => {
-//     if (!user) {
-//         done('No user');
-//     }
-//     done(null, user);
-// });
+passport.serializeUser((user, done) => {
+    if (!user) {
+        done('No user');
+    }
+    done(null, user);
+});
 
-// passport.deserializeUser((obj, done) => {
-//     done(null, obj);
-// });
+passport.deserializeUser((obj, done) => {
+    done(null, obj);
+});
 
 
 //////////////////////////////
@@ -89,8 +87,8 @@ massive(process.env.CONNECTION_STRING)
 //Register new user.
 app.post('/api/register', controller.create);
 
-//Login user.
-app.post('/api/login', controller.read);
+// //Login user.
+// app.post('/api/login', controller.read);
 
 //Get user profile
 app.post('/api/profile', controller.readBio);
@@ -108,7 +106,7 @@ app.post('/api/match', interestController.post);
 app.get('/api/matches/:id', interestController.read);
 
 // AUTH STUFF TO BE SET UP STILL
-// app.get('/test', (req, res)=>{res.send(req.user)})
-// app.post('/login', passport.authenticate(['login']), (req, res, next) => {
-//     res.send('Successful login.')
-// })
+app.get('/test', (req, res)=>{res.send(req.user)})
+app.post('/api/login', passport.authenticate(['login']), (req, res, next) => {
+    res.send('Successful login.')
+})

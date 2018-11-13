@@ -9,7 +9,8 @@ import {
         } from 'reactstrap';
 
 //Custom
-import Handler from '../Handler'
+import Handler from '../Handler';
+import './index.scss';
 
 
 class Landing extends Component {
@@ -53,25 +54,28 @@ class Landing extends Component {
         const {matches} = this.state;
         const matchDisplay = matches.map((match, i) => {
             return(
-                <div value={i} >
-                    {match.bio}
-                    {match.interest_1}
-                    {match.interest_2}
-                    {match.interest_3}
+                <div className='interestCard' value={i} >
+                    <p>BIO {match.bio}</p>
+                    <p>Interest 1: {match.interest_1}</p>
+                    <p>Interest 2: {match.interest_2}</p>
+                    <p>Interest 3:{match.interest_3}</p>
                 </div>
             )
         })       
         return(
-            <div>
+            <div className='card'>
                 <h2>Search</h2>
-                <Button onClick={this.matchat}>Matchat</Button>
+                <Button className='butt' onClick={this.matchat}>Matchat</Button>
                 {/* Get all users with matching interest(s)
                 or search for an interst */}
-                <InputGroup >
-                    <InputGroupAddon  addonType="prepend"><Button onClick={this.searchInterest}>Search @ </Button></InputGroupAddon>
+                <InputGroup className='butt' >
+                    <InputGroupAddon  addonType="prepend"><Button  onClick={this.searchInterest}>Search @ </Button></InputGroupAddon>
                     <Input name='interest' placeholder='Chat interest' onChange={(e)=>{this.setState({interest:Handler(e)})}}/>
                 </InputGroup>
-                {matchDisplay}
+                <div className='container'>
+                    {matchDisplay}
+                </div>
+                
                 
             </div>
         )
