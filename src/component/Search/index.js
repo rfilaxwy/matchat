@@ -17,6 +17,7 @@ class Landing extends Component {
     constructor(){
         super();
         this.state = {
+            userid:'',
             matches:[],
             interest:'',
             dropdownOpen: false,
@@ -24,6 +25,10 @@ class Landing extends Component {
         }
         this.toggleDropDown = this.toggleDropDown.bind(this);
         this.searchInterest = this.searchInterest.bind(this);
+    }
+    componentDidMount(){
+        const {userid} = this.props;
+        this.setState({userid:userid});
     }
 
     toggleDropDown() {

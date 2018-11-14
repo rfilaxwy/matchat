@@ -1,4 +1,5 @@
 const express = require('express'),
+    path = require('path'),
     cors = require('cors'),
     bodyParser = require('body-parser'),
     massive = require('massive'),
@@ -17,6 +18,7 @@ const {SESSION_SECRET} = process.env;
 
 app.use(cors());
 app.use(bodyParser.json());
+app.use(express.static(`${__dirname}/../build`));
 app.use(session({
     secret: SESSION_SECRET,
     resave: false,
@@ -110,3 +112,7 @@ app.get('/test', (req, res)=>{res.send(req.user)})
 app.post('/api/login', passport.authenticate(['login']), (req, res, next) => {
     res.send('Successful login.')
 })
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../build/index.html'));
+});
