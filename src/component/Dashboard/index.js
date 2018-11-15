@@ -11,9 +11,9 @@ class Landing extends Component {
         this.state = {
             username:'',
             bio:'',
-            interstOne:'',
-            interstTwo:'',
-            interstThree:'',
+            interst_1:'',
+            interst_2:'',
+            interst_3:'',
             profilePicture:'',
             userid:'',
             toggle:false
@@ -28,7 +28,7 @@ class Landing extends Component {
         axios.post('/api/profile',{userid}).then(res => {
             console.log(res.data)
             const {bio, interest_1, interest_2, interest_3} = res.data;
-            addInterest(interest_1, interest_2, interest_3)
+            addInterest(userid,interest_1, interest_2, interest_3)
             this.setState({
                 bio:bio, 
                 interestOne:interest_1, 
@@ -87,7 +87,7 @@ class Landing extends Component {
     update(){
         const {userid, bio, interestOne, interestTwo, interestThree}= this.state;
         axios.put('/api/update', {userid, bio, interestOne, interestTwo, interestThree}).then(res => {
-            console.log(res.data);
+            
         })
     }
     delete(){

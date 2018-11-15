@@ -34,7 +34,7 @@ app.use(passport.session());
 
 
 
-const port = process.env.SERVER_PORT;
+const port = process.env.SERVER_PORT||8084;
 
 massive(process.env.CONNECTION_STRING)
     .then(db => {
@@ -105,7 +105,7 @@ app.delete('/api/user/:id', controller.delete);
 app.post('/api/match', interestController.post);
 
 //Find all that match any of users interests
-app.get('/api/matches/:id', interestController.read);
+app.post('/api/matches', interestController.post2);
 
 // AUTH STUFF TO BE SET UP STILL
 app.get('/test', (req, res)=>{res.send(req.user)})

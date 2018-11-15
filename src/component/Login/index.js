@@ -8,9 +8,6 @@ import {getUser} from '../../ducks/reducer';
 //Custom
 import Handler from '../Handler';
 
-//Auth0
-import auth0 from 'auth0-js';
-
 //Bootstrap/Reactstrap
 import { Col, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
@@ -27,6 +24,7 @@ class Login extends Component {
     }
     
     login(){
+        debugger
         const {username, password} = this.state;
         axios.post('/api/login',{username, password}).then(res => {
             

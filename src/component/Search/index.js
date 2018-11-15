@@ -25,6 +25,7 @@ class Landing extends Component {
         }
         this.toggleDropDown = this.toggleDropDown.bind(this);
         this.searchInterest = this.searchInterest.bind(this);
+        this.matchat = this.matchat.bind(this);
     }
     componentDidMount(){
         const {userid} = this.props;
@@ -38,10 +39,12 @@ class Landing extends Component {
       }
 
     matchat(){
-        const {userid} = this.props;
+        const {interest_1,interest_2,interest_3} = this.props;
         let matches = [];
-        axios.post(`/api/matches${userid}`).then( result => {
-                matches = result.data;
+        debugger
+        axios.post(`/api/matches`,{interest_1,interest_2, interest_3}).then( result => {
+            debugger    
+            matches = result.data;
                 this.setState({matches:matches})
             });        
       }
@@ -87,12 +90,8 @@ class Landing extends Component {
     }
 }
 function mapStateToProps (state) {
-    const { username, firstname, city, country, userid, interest_1, interest_2, interest_3 } = state;
+    const { userid, interest_1, interest_2, interest_3 } = state;
     return {
-        username,
-        firstname,
-        city,
-        country,
         userid,
         interest_1,
         interest_2,

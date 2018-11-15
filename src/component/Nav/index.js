@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import './index.scss';
+import {Link} from 'react-router-dom';
 //Reactstrap
 import {
     Collapse,
@@ -36,16 +37,16 @@ export default class Landing extends Component {
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="ml-auto" navbar>
                             <NavItem>
-                                <NavLink href="/calendar">Calendar</NavLink>
+                                <Link to='/calendar'><NavLink>Calendar</NavLink></Link>
                             </NavItem>
                             <NavItem>
-                                <NavLink href="/dashboard">Dashboard</NavLink>
+                                <Link to='/dashboard'><NavLink>Dashboard</NavLink></Link>
                             </NavItem>
                             <NavItem>
-                                <NavLink href="/search">Search</NavLink>
+                                <Link to='/search'><NavLink>Search</NavLink></Link>
                             </NavItem>
                             <NavItem>
-                                <NavLink href="/">Log out</NavLink>
+                                <Link to="/"><NavLink>Log out</NavLink></Link>
                             </NavItem>
                         </Nav>
                     </Collapse>

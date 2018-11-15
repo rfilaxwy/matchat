@@ -6,9 +6,10 @@ module.exports = {
             res.status(200).send(result);
         })
     },
-    read: (req, res) => {
+    post2: (req, res) => {
         const db = req.app.get('db');
-        db.all_matches(req.params.id).then(result => {
+        const {userid}= req.params.id;
+        db.all_matches(userid).then(result => {
             res.status(200).send(result);
         })
     } 
