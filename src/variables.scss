@@ -18,7 +18,8 @@ $card-color:linear-gradient(to right, rgb(170, 177, 199), rgba(253, 253, 253, 0.
 
 .App{
     background-image:$card-color;
-    height:100vh;
+    height:stretch;
+    overflow:auto;
     width:100vw;
     position:absolute;
 }
@@ -27,6 +28,7 @@ $card-color:linear-gradient(to right, rgb(170, 177, 199), rgba(253, 253, 253, 0.
     border:$card-border;
     box-shadow:$card-shadow;
     background-image:$card-color;
+    
 }
 .butt {
     margin-top:5px !important;

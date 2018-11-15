@@ -9,12 +9,21 @@ span{
 
 .inputs {
     width:250px;
-    height:25px;
+    height:23px;
     margin:auto;
     background-color:rgb(240, 238, 238);
 }
+.interestCard{
+    display:flex;
+    flex-direction:column;
+    align-self:center;
+    box-sizing:border-box;
+    width:65% !important;    
+}
 .inputsBio{
     height:150px;
+    box-sizing: border-box;
+    overflow: scroll;
 }
 .butt {
     margin-top:5px !important;
@@ -28,7 +37,6 @@ span{
     }
     .butt{
         display:block !important;
-        
         margin: 5px auto;
     }
 }

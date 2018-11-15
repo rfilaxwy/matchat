@@ -24,10 +24,8 @@ class Login extends Component {
     }
     
     login(){
-        debugger
         const {username, password} = this.state;
         axios.post('/api/login',{username, password}).then(res => {
-            
             if(res.data){
                 const {firstname,username,city,country, userid} = res.data[0];
                 this.props.getUser(firstname, username, city, country, userid);            

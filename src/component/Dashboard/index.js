@@ -28,7 +28,7 @@ class Landing extends Component {
         axios.post('/api/profile',{userid}).then(res => {
             console.log(res.data)
             const {bio, interest_1, interest_2, interest_3} = res.data;
-            addInterest(userid,interest_1, interest_2, interest_3)
+            this.props.addInterest(userid,interest_1, interest_2, interest_3)
             this.setState({
                 bio:bio, 
                 interestOne:interest_1, 
@@ -135,13 +135,16 @@ class Landing extends Component {
 }
 
 function mapStateToProps (state) {
-    const { username, firstname, city, country, userid } = state;
+    const { username, firstname, city, country, userid,interest_1,interest_2,interest_3 } = state;
     return {
         username,
         firstname,
         city,
         country,
-        userid
+        userid,
+        interest_1,
+        interest_2,
+        interest_3
     }
 }
 export default connect(mapStateToProps, {addInterest})(Landing);
