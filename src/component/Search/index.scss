@@ -11,13 +11,22 @@
 }
 .interestCard{
     border:$card-border;
+    border-radius:10px;
     box-shadow:$card-shadow;
     background-image:$card-color;
     margin:4px;
     box-sizing:border-box;
-    width: 30%;
+    width: 33% !important;
     height: 325px;
-    padding:5px;
-    justify-content: center;
+    justify-content: space-around;
     align-items:center;
+}
+p{
+    margin:5px;
+    padding:5px;
+}
+.interestCard > div {
+    background-color: rgba(21, 121, 88, 0.219);
+    width:90% !important;
+    border-radius: 15px;
 }

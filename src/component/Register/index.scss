@@ -1,3 +1,17 @@
-// Form {
-//     padding:20px;
-// }
+@import '../../variables';
+
+.input{
+    width:200px !important;
+}
+
+Label{
+    font-style:$cabin;
+    font-size:19px;
+    
+}
+h2{
+    margin-bottom:50px !important;
+}
+h2, Label{
+    color:$headColor !important;
+}

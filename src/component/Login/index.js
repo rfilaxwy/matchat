@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
-
+import './index.scss';
 //Redux
 import {connect} from 'react-redux';
 import {getUser} from '../../ducks/reducer';
@@ -43,9 +43,9 @@ class Login extends Component {
                 <Form>
                     <FormGroup row> 
                         <Col sm={2} />                   
-                        <Label for="username" sm={2}>Username</Label>
+                        <Label for="username" sm={3}>Username</Label>
                         <Col sm={4}> 
-                            <Input 
+                            <Input className='input'
                                 type="username" 
                                 name="username" 
                                 id="username"
@@ -57,9 +57,9 @@ class Login extends Component {
                     </FormGroup>
                     <FormGroup row>
                         <Col sm={2} />
-                        <Label for="password" sm={2}>Password</Label>
+                        <Label for="password" sm={3}>Password</Label>
                         <Col sm={4}>
-                            <Input 
+                            <Input className='input'
                                 type="password" 
                                 name="password" 
                                 id="password" 
@@ -69,9 +69,9 @@ class Login extends Component {
                                 />
                         </Col>
                     </FormGroup>   
-                    <Button onClick={this.login}>Login</Button>
+                    <Button className='butt' onClick={this.login}>Login</Button>
                     <Link to="/">
-                        <Button onClick={this.cancel}>Cancel</Button>
+                        <Button className='butt' onClick={this.cancel}>Cancel</Button>
                     </Link>  
                 </Form>
                 <h5>{this.state.alert}</h5>

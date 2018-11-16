@@ -118,8 +118,10 @@ class Landing extends Component {
                         <div>BIO:<div className='inputs inputsBio'id='bio'>{this.state.bio}</div><span onClick={()=>{this.editInterest(4)}}>Edit</span><span onClick={()=>{this.save(4)}}>Save</span></div>
                     </section>
                 </div>
+                <div>
                 <Button className='butt' onClick={this.update}>Update</Button>
                 <Button className='butt' color="danger" onClick={this.toggle}>Delete Profile</Button>
+                </div>
                 <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
                     <ModalBody>
                        Are you sure you want to delete, forever, your profile?

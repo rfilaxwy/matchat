@@ -15,6 +15,8 @@ $break-large: 1200px;
 $card-border: 1px solide rgba(244,244,244,.7);
 $card-shadow: 1px 7px 20px 1px  rgba(24, 38, 43, 0.39);
 $card-color:linear-gradient(to right, rgb(170, 177, 199), rgba(253, 253, 253, 0.534),rgb(164, 168, 140));
+$card-width: 86%;
+$border-reset: none !important;
 
 .App{
     background-image:$card-color;
@@ -22,16 +24,24 @@ $card-color:linear-gradient(to right, rgb(170, 177, 199), rgba(253, 253, 253, 0.
     overflow:auto;
     width:100vw;
     position:absolute;
+    padding:50px;
 }
 
 .card{
     border:$card-border;
     box-shadow:$card-shadow;
     background-image:$card-color;
+    width:$card-width;
     
 }
 .butt {
     margin-top:5px !important;
     margin:auto;
     width:130px;
+}
+
+.input {
+    background-color: rgba(255, 255, 255, 0.26) !important;
+    border:$border-reset;
+    border-bottom: 1px solid rgb(197, 190, 190) !important;
 }

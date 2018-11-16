@@ -43,19 +43,20 @@ export default class Landing extends Component {
 
     render(){
         return(
-        <Form>
+        <Form className='card'>
+        <h2>New User Registration</h2>
             <Row form>
             <Col sm={2} />
                 <Col sm={4}>
                     <FormGroup>
                         <Label for="firstname">First name</Label>
-                        <Input onChange={(e) => this.setState({firstname:Handler(e)})} type="firstname" name="firstname" id="firstname" placeholder="First name" />
+                        <Input className='input' onChange={(e) => this.setState({firstname:Handler(e)})} type="firstname" name="firstname" id="firstname" placeholder="First name" />
                     </FormGroup>
                 </Col>
                 <Col sm={4}>
                     <FormGroup>
                         <Label for="username">Username</Label>
-                        <Input onChange={(e) => this.setState({username:Handler(e)})} type="username" name="username" id="username" placeholder="Minimum 5 characters" />
+                        <Input className='input' onChange={(e) => this.setState({username:Handler(e)})} type="username" name="username" id="username" placeholder="Minimum 5 characters" />
                     </FormGroup>
                 </Col>
             </Row>
@@ -64,13 +65,13 @@ export default class Landing extends Component {
                 <Col sm={4}>
                     <FormGroup>
                         <Label for="email">Email</Label>
-                        <Input onChange={(e) => this.setState({email:Handler(e)})} type="email" name="email" id="email" placeholder="Email" />
+                        <Input className='input' onChange={(e) => this.setState({email:Handler(e)})} type="email" name="email" id="email" placeholder="Email" />
                     </FormGroup>
                 </Col>
                 <Col sm={4}>
                     <FormGroup>
                         <Label for="password">Password</Label>
-                        <Input onChange={(e) => this.setState({password:Handler(e)})} type="password" name="password" id="password" placeholder="Minimum of 8 characters" />
+                        <Input className='input' onChange={(e) => this.setState({password:Handler(e)})} type="password" name="password" id="password" placeholder="Minimum of 8 characters" />
                     </FormGroup>
                 </Col>
             </Row>
@@ -79,20 +80,22 @@ export default class Landing extends Component {
                 <Col sm={4}>
                     <FormGroup>
                         <Label for="city">City</Label>
-                        <Input onChange={(e) => this.setState({city:Handler(e)})} type="text" name="city" id="city" placeholder="City"/>
+                        <Input className='input' onChange={(e) => this.setState({city:Handler(e)})} type="text" name="city" id="city" placeholder="City"/>
                     </FormGroup>
                 </Col>
                 <Col sm={4}>
                     <FormGroup>
                         <Label for="country">Country</Label>
-                        <Input onChange={(e) => this.setState({country:Handler(e)})} type="text" name="country" id="country" placeholder="Country"/>
+                        <Input className='input'onChange={(e) => this.setState({country:Handler(e)})} type="text" name="country" id="country" placeholder="Country"/>
                     </FormGroup>
                 </Col>
             </Row>
-                <Button onClick={this.register}>Submit</Button>
-            <Link to="/">
-                <Button>Cancel</Button>
-            </Link>
+            <div>
+                <Button className='butt' onClick={this.register}>Submit</Button>
+                <Link to="/">
+                    <Button className='butt'>Cancel</Button>
+                </Link>
+            </div>
         </Form>
         )  
     }

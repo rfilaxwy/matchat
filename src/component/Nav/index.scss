@@ -1,13 +1,18 @@
 @import '../../variables';
 
 
-span {
+.logo {
     font-family: $josefin ;
     color: $matLogo;
     font-weight:800;
 }
 
-
+#navBar{
+    position:absolute !important;
+    top:0;
+    left:0;
+    width:100%;
+}
 
 @media only screen and (min-width: $break-small) {
     #navBar{
