@@ -15,16 +15,24 @@
 }
 
 @media only screen and (min-width: $break-small) {
-    #navBar{
+    #navBar {
         background-color:rgba(219, 201, 201, 0.2)!important;
     }
 }
 @media only screen and (max-width: $break-large) {
-    #navBar{
-        background-color: rgba(204, 180, 180, 0.637) !important;
+    .butt {
+        margin:auto !important;
+    }
+    .interestCard {
+        display: block;
+        box-sizing: content-box;
+        .bio{
+            display:none;
+            padding:10px !important;
+        }
     }
 }
-.card{
+.card {
     margin-top:20px !important;
 }
 .interestCard{
