@@ -25,7 +25,6 @@ app.use(session({
 }))
 
 
-app.use(express.static(`${__dirname}/build`) );
 
 app.use(passport.initialize());
 app.use(passport.session());
